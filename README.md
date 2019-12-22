@@ -6,3 +6,6 @@ A simple execution server that takes cmd input and executes it in bash.
 
 #google.go
 A web scraper based on the bing-metadata go scraper from bhg.
+
+#dnsA.go
+Takes the first sysarg and searches for it's A record. e.g. ./dnsA google.com
