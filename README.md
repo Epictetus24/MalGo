@@ -9,3 +9,6 @@ A web scraper based on the bing-metadata go scraper from bhg.
 
 #dnsA.go
 Takes the first sysarg and searches for it's A record. e.g. ./dnsA google.com
+
+#vulnfuzz.go
+Fuzzes vulnserver for overflow vulnerabilities.
