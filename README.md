@@ -12,3 +12,6 @@ Takes the first sysarg and searches for it's A record. e.g. ./dnsA google.com
 
 #vulnfuzz.go
 Fuzzes vulnserver for overflow vulnerabilities.
+
+#azurepillage.go
+Incomplete script that pillages a filepath (azurepillage.exe [filepath]) for azure specific file extensions.
