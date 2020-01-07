@@ -1,28 +1,22 @@
 package main
 
 import (
-        "fmt"
-        "log"
-        "os"
-        "path/filepath"
-        "regexp"
+	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+	"regexp"
+	"bufio"
+	"strings"
 )
 
 var regexes = []*regexp.Regexp{
-        regexp.MustCompile(`(?i)login`),
-        regexp.MustCompile(`(?i)pfx`),
-        regexp.MustCompile(`(?i)cer`),
-        regexp.MustCompile(`(?i)publishsettings`),
-        regexp.MustCompile(`(?i)cspkg`),
-        regexp.MustCompile(`(?i)config`),
-}
-
-var azurestrings = []*regexp.Regexp{
-        regexp.MustCompile(`(?i)TokenCache`),
-        regexp.MustCompile(`(?i)Tenant`),
-        regexp.MustCompile(`(?i)PublishSettingsFileUrl`),
-        regexp.MustCompile(`(?i)ManagementPortalUrl`),
-        regexp.MustCompile(`(?i)SAM`),
+	regexp.MustCompile(`(?i)login`),
+	regexp.MustCompile(`(?i)pfx`),
+	regexp.MustCompile(`(?i).cer`),
+	regexp.MustCompile(`(?i)publishsettings`),
+	regexp.MustCompile(`(?i)cspkg`),
+	regexp.MustCompile(`(?i).config`),
 }
 
 
@@ -36,20 +30,20 @@ func walkFn(path string, f os.FileInfo, err error) error {
 }
 
 func stringHunt(path2 string, f2 os.FileInfo, err error) error {
-        if f2.IsDir() {
-                return nil
-        }
+	if f2.IsDir() {
+    		return nil
+	}
 
 
-        fn, err := os.Open(path2)
+	fn, err := os.Open(path2)
         if err != nil {
-                log.Fatalln(err)
+        	log.Fatalln(err)
         }
         defer fn.Close()
 
         scanner := bufio.NewScanner(fn)
         azurestrings := []string{"TokenCache", "Tenant", "PublishSettings", "FileURL", "ManagementPortalURL"}
-        azurecnt := len(azurestrings)
+	azurecnt := len(azurestrings)
 
         for scanner.Scan() {
                 file := scanner.Text()
@@ -63,16 +57,16 @@ func stringHunt(path2 string, f2 os.FileInfo, err error) error {
         if err := scanner.Err(); err != nil {
                 log.Fatalln(err)
         }
-        return nil
+	return nil
 }
 
 
 func main() {
-        root := os.Args[1]
-        if err := filepath.Walk(root, walkFn); err != nil {
-                log.Panicln(err)
-        }
-        if err := filepath.Walk(root, stringHunt); err != nil {
+	root := os.Args[1]
+	if err := filepath.Walk(root, walkFn); err != nil {
+		log.Panicln(err)
+	}
+	if err := filepath.Walk(root, stringHunt); err != nil {
                 log.Panicln(err)
         }
 }
