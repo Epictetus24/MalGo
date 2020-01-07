@@ -14,4 +14,4 @@ Takes the first sysarg and searches for it's A record. e.g. ./dnsA google.com
 Fuzzes vulnserver for overflow vulnerabilities.
 
 #azurepillage.go
-Incomplete script that pillages a filepath (azurepillage.exe [filepath]) for azure specific file extensions.
+Incomplete script that pillages a filepath (azurepillage.exe [filepath]) for azure specific file extensions. It also reads files in the subdirectories to find possible json profiles. Use in smaller user directories etc as using in c:\ will eat a ton of RAM and give you a ton of potential files.
