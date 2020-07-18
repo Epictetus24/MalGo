@@ -1,8 +1,19 @@
 # MalGo - A set of simple go tools for pentesting.
 My collection of malicious Go scripts, mostly modified examples of scripts from the excellent Blackhat Go by No Starch Press
+# goscraper.go
+
+A simple webscraper for pentesteracademy videos, usage:
+
+```sh
+go run goscraper.go [courseid] [cookie]
+
+go run goscraper.go 11 eW91cmNvb2tpZWdvZXNoZXJlLCBpdCdzIHRoZSBzdHVmZiBhZnRlciAiU0FDU0lEPSI=
+
+```
+
+
 # gowebscan.go
 Web app testing automation tool, just to get nikto, testssl & gobuster running against multiple targets. You need to give it a file with hostnames, and if you want ips you can add those too. It will check if the IP matches the hostname, to ensure the tools resolve to the correct address.
-
 
 Example syntax for hostsfile:
 google.com:127.0.0.1
